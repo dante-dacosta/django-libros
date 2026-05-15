@@ -35,11 +35,13 @@
                         </tr>
                     </thead>
                     <tbody>
+
+                        {% for libro in libros %}
                         <tr class="">
-                            <td scope="row">1</td>
-                            <td>DJango con Python</td>
-                            <td>Imagenrawrxd</td>
-                            <td>Libro que habla sobre programar con Django que divertido.</td>
+                            <td scope="row">{{libro.id}}</td>
+                            <td>{{libro.titulo}}</td>
+                            <td><img src="{{libro.imagen.url}}" alt="" srcset="" height="100" width="100"></td>
+                            <td>{{libro.descripcion}}</td>
                             <td>
                                 <a
                                     name=""
@@ -60,6 +62,7 @@
                                 
                             </td>
                         </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>

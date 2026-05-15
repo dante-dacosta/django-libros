@@ -1,19 +1,24 @@
 <form enctype="multipart/form-data" method="post">
-
-    <div class="mb-3">
-        <label for="" class="form-label">Titulo</label>
-        <input
-            type="text"
-            class="form-control"
+    {% csrf_token %}
+    {% for campo in form %}
+        <div class="mb-3">
+            <label for="" class="form-label">{{campo.label}}</label>
+            <input
+                type="{{ campo.field.widget.input_type }}"
+                class="form-control"
+                name="{{campo.name}}"
+                id=""
+                aria-describedby="helpId"
+                placeholder="Ingrese el {{campo.name}} del libro"
+            />
+        </div>
+        <div class ="col-12"> {{campo.errors}} </div>
+    {% endfor %} 
+        <input type="submit" value="Guardar" class="btn btn-success item-center float-start"/>
+        <a
             name=""
             id=""
-            aria-describedby="helpId"
-            placeholder=""
-        />
-        <small id="helpId" class="form-text text-body-secondary"
-            >Ingrese el titulo del libro</small
-        >
-    </div>
-    
-
+            class="btn btn-info item-center float-end"
+            href="{% url 'libros' %}"
+            role="button">Regresar</a>   
 </form>
