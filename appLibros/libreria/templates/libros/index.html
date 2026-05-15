@@ -47,7 +47,7 @@
                                     name=""
                                     id=""
                                     class="btn btn-info"
-                                    href="{% url 'editarLibro' %}"
+                                    href="{% url 'editarLibro' libro.id %}"
                                     role="button"
                                     >Editar</a
                                 >
@@ -55,7 +55,7 @@
                                     name=""
                                     id=""
                                     class="btn btn-danger"
-                                    href="#"
+                                    href="{% url 'eliminarLibro' libro.id %}"
                                     role="button"
                                     >Borrar</a
                                 >

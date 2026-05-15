@@ -1,24 +1,40 @@
 <form enctype="multipart/form-data" method="post">
     {% csrf_token %}
     {% for campo in form %}
+
+        {% if campo.errors %}
+            <div class="alert alert-danger" role="alert">
+                {{campo.errors}}
+            </div>
+        {% endif %}
+
+        {% if campo.field.widget.input_type == "file" and campo.value %}
+            <div class="mb-3">
+                <label for="" class="form-label"></label>
+                <br>
+                <img src="{{campo.value.url}}" alt="" srcset="" height="100" width="100">
+            </div>
+        {% endif %}
+
         <div class="mb-3">
             <label for="" class="form-label">{{campo.label}}</label>
             <input
                 type="{{ campo.field.widget.input_type }}"
                 class="form-control"
-                name="{{campo.name}}"
+                name="{{ campo.name }}"
                 id=""
                 aria-describedby="helpId"
-                placeholder="Ingrese el {{campo.name}} del libro"
-            />
+                placeholder="Ingrese el {{ campo.name }} del libro"
+                value="{{ campo.value | default_if_none:'' }}"
+                />
         </div>
-        <div class ="col-12"> {{campo.errors}} </div>
+        
     {% endfor %} 
         <input type="submit" value="Guardar" class="btn btn-success item-center float-start"/>
         <a
             name=""
             id=""
-            class="btn btn-info item-center float-end"
+            class="btn btn-danger item-center float-end"
             href="{% url 'libros' %}"
-            role="button">Regresar</a>   
+            role="button">Cancelar</a>   
 </form>
